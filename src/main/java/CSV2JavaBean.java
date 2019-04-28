@@ -33,7 +33,6 @@ public class CSV2JavaBean
             beans = new CsvToBeanBuilder(new FileReader(file)).withType(tClass)
                     .withSkipLines(0).withSkipLines(1).withSkipLines(2)
                     .build().parse();
-            System.out.println(beans.size());
         }
         catch (FileNotFoundException e)
         {
