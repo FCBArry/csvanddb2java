@@ -39,7 +39,7 @@ public class CSVGen
         VelocityGen velocityGen = new VelocityGen(conf.getProperties());
 
         String csvPath = (String) conf.getProperties().get("project_dir") + conf.getProperties().get("csv_dir");
-        List<File> files = getTotalFiles(csvPath);
+        List<File> files = Utils.getTotalFiles(csvPath);
         for (File file : files)
         {
             List<FieldInfo> fieldInfoList = readHead(file);
@@ -47,23 +47,10 @@ public class CSVGen
                 return;
 
             String fileName = file.getName();
-            String className = genClassName(fileName);
+            String className = Utils.genClassName(fileName);
             String sourceDomain = fileName.replace(".csv", "");
             velocityGen.genBean(className, sourceDomain, fieldInfoList);
         }
-    }
-
-    private String genClassName(String fileName)
-    {
-        String[] sub = fileName.split("_");
-        String className = "";
-        if (sub.length < 2)
-            return className;
-
-        for (int i = 2; i < sub.length; i++)
-            className +=  sub[i].substring(0, 1).toUpperCase() + sub[i].substring(1);
-
-        return className.replace(".csv", "");
     }
 
     private List<FieldInfo> readHead(File file)
@@ -143,31 +130,5 @@ public class CSVGen
             return "String";
 
         return null;
-    }
-
-    private List<File> getTotalFiles(String csvPath)
-    {
-        List<File> files = new ArrayList<>();
-        getTotalFiles(csvPath, files);
-        return files;
-    }
-
-    private void getTotalFiles(String filePath, List<File> totalFileList)
-    {
-        File root = new File(filePath);
-        if (!root.exists())
-            return;
-
-        File[] files = root.listFiles();
-        if (files == null)
-            return;
-
-        for (File file : files)
-        {
-            if (file.isDirectory())
-                getTotalFiles(file.getAbsolutePath(), totalFileList);
-            else if (file.isFile())
-                totalFileList.add(file);
-        }
     }
 }

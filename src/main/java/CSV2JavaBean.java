@@ -1,5 +1,6 @@
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
@@ -16,24 +17,22 @@ public class CSV2JavaBean
 {
     public static<T> List<T> getBeanList(Class<T> tClass)
     {
+        return getBeanList("src/main/resources/project.conf", tClass);
+    }
+
+    public static<T> List<T> getBeanList(String confPath, Class<T> tClass)
+    {
         List<T> beans = null;
         try
         {
-            Iterator iterator = new CsvToBeanBuilder(new FileReader("src\\test\\resources\\csv\\t_s_fire.csv"))
-                    .withType(tClass).build().iterator();
+            Conf conf = new Conf();
+            conf.init(confPath);
+            String csvPath = (String) conf.getProperties().get("project_dir") + conf.getProperties().get("csv_dir");
+            File file = Utils.getFileByClassName(csvPath, tClass.getSimpleName());
 
-            int index = 0;
-            while (iterator.hasNext())
-            {
-                index++;
-                if (index <= 3)
-                    continue;
-
-                T bean = (T) iterator.next();
-                beans.add(bean);
-                iterator.remove();
-            }
-
+            beans = new CsvToBeanBuilder(new FileReader(file)).withType(tClass)
+                    .withSkipLines(0).withSkipLines(1).withSkipLines(2)
+                    .build().parse();
             System.out.println(beans.size());
         }
         catch (FileNotFoundException e)
