@@ -74,7 +74,7 @@ public class CSVGen
                 FieldInfo fieldInfo = new FieldInfo();
 
                 // 字段名
-                String[] data = dataList.get(0);
+                String[] data = dataList.get(2);
                 if (data[i].startsWith("\uFEFF"))
                     data[i] = data[i].substring(1);
                 String name = data[i].substring(0, 1).toLowerCase() + data[i].substring(1);;
@@ -88,7 +88,7 @@ public class CSVGen
                 fieldInfo.setJavaType(jType);
 
                 // 注释
-                data = dataList.get(2);
+                data = dataList.get(0);
                 String regEx = "[`~!@#$%^&*()+=|{}':;',※и\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\s+]";
                 Matcher m = Pattern.compile(regEx).matcher(data[i]);
                 String comment =  m.replaceAll("").trim();
@@ -128,6 +128,10 @@ public class CSVGen
             return "int";
         else if (data.startsWith("varchar"))
             return "String";
+        else if (data.startsWith("List<Integer>"))
+            return "List<Integer>";
+        else if (data.startsWith("List<String>"))
+            return "List<String>";
 
         return null;
     }

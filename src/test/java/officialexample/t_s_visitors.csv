@@ -1,0 +1,5 @@
+ID,等级,本级所需经验
+int(11),int(11),int(11)
+firstName,lastName,visitsToWebsite
+John,Doe,12
+Jane,Doe,23

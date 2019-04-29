@@ -15,12 +15,13 @@ import java.util.List;
  */
 public class CSV2JavaBean
 {
-    public static<T> List<T> getBeanList(Class<T> tClass)
+    public static<T> List<T> getBeanList(Class tClass)
     {
         return getBeanList("src/main/resources/project.conf", tClass);
     }
 
-    public static<T> List<T> getBeanList(String confPath, Class<T> tClass)
+    @SuppressWarnings("unchecked")
+    public static<T> List<T> getBeanList(String confPath, Class tClass)
     {
         List<T> beans = null;
         try
@@ -29,10 +30,12 @@ public class CSV2JavaBean
             conf.init(confPath);
             String csvPath = (String) conf.getProperties().get("project_dir") + conf.getProperties().get("csv_dir");
             File file = Utils.getFileByClassName(csvPath, tClass.getSimpleName());
-
-            beans = new CsvToBeanBuilder(new FileReader(file)).withType(tClass)
-                    .withSkipLines(0).withSkipLines(1).withSkipLines(2)
-                    .build().parse();
+            if (file != null)
+            {
+                beans = new CsvToBeanBuilder(new FileReader(file)).withType(tClass)
+                        .withSkipLines(2)
+                        .build().parse();
+            }
         }
         catch (FileNotFoundException e)
         {

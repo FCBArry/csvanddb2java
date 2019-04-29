@@ -1,5 +1,7 @@
 package javabean;
 
+import java.util.List;
+import com.opencsv.bean.CsvBindAndSplitByName;
 import com.opencsv.bean.CsvBindByName;
 
 public class FireBean
