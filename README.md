@@ -42,8 +42,12 @@ author:https://github.com/FCBArry
 
 4.支持list类型 20190429 done 暂时支持2种List<Integer>，List<String>以逗号分割a1,a2,a3......
 
-5.支持自定义类型
+5.支持自定义类型：http://opencsv.sourceforge.net/#annotations_2
 
 6.去除读文件时的BOM格式问题
+
+（1）如果按照csv头部注释，类型，字段名的顺序，withSkipLines(2)则不会有问题
+
+（2）......
 
 7.解决csv头部注释，类型，字段名顺序问题

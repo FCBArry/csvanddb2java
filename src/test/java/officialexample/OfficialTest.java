@@ -20,8 +20,7 @@ public class OfficialTest
         try
         {
             beans = new CsvToBeanBuilder(new FileReader("src/test/java/officialexample/t_s_visitors.csv"))
-                    .withType(Visitors.class)
-                    .withSkipLines(2)
+                    .withType(Visitors.class).withSkipLines(2)
                     .build().parse();
         }
         catch (Exception e)

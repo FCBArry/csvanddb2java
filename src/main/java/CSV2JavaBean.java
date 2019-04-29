@@ -32,8 +32,8 @@ public class CSV2JavaBean
             File file = Utils.getFileByClassName(csvPath, tClass.getSimpleName());
             if (file != null)
             {
-                beans = new CsvToBeanBuilder(new FileReader(file)).withType(tClass)
-                        .withSkipLines(2)
+                beans = new CsvToBeanBuilder(new FileReader(file))
+                        .withType(tClass).withSkipLines(2)
                         .build().parse();
             }
         }
