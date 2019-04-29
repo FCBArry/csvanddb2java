@@ -45,3 +45,5 @@ author:https://github.com/FCBArry
 5.支持自定义类型
 
 6.去除读文件时的BOM格式问题
+
+7.解决csv头部注释，类型，字段名顺序问题
