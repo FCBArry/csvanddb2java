@@ -29,7 +29,7 @@ author:https://github.com/FCBArry
 
 5.生成目录在jartools下
 
-6.注意csv的编码格式不能带有BOM
+6.注意csv的编码格式不能带有BOM（如果按照csv头部注释，类型，字段名的顺序则不用关心）
 
 ------------------------------------
 计划：
@@ -44,10 +44,22 @@ author:https://github.com/FCBArry
 
 5.支持自定义类型：http://opencsv.sourceforge.net/#annotations_2
 
-6.去除读文件时的BOM格式问题
+6.去除读文件时的BOM格式问题，解决csv头部注释，类型，字段名顺序问题
 
 （1）如果按照csv头部注释，类型，字段名的顺序，withSkipLines(2)则不会有问题
 
-（2）......
+（2）可通过CsvToBeanFilter来过滤
+/*
+CsvToBeanFilter filter = new CsvToBeanFilter()
+{
+    @Override
+    public boolean allowLine(String[] strings)
+    {
+        return false;
+    }
+};
+*/
 
-7.解决csv头部注释，类型，字段名顺序问题
+（3）......
+
+7.skipLines的设计不合理

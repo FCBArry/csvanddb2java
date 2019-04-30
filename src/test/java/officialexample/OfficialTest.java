@@ -19,7 +19,8 @@ public class OfficialTest
         List<Visitors> beans = null;
         try
         {
-            beans = new CsvToBeanBuilder(new FileReader("src/test/java/officialexample/t_s_visitors.csv"))
+            FileReader fileReader=  new FileReader("src/test/java/officialexample/t_s_visitors.csv");
+            beans = new CsvToBeanBuilder(fileReader)
                     .withType(Visitors.class).withSkipLines(2)
                     .build().parse();
         }
