@@ -9,8 +9,7 @@ import java.util.Date;
 #end
 import it.biobytes.ammentos.PersistentEntity;
 import it.biobytes.ammentos.PersistentField;
-
-@PersistentEntity(sourceDomain = "${sourceDomain}", targetDomain = "", primaryKey = "id")
+@PersistentEntity(sourceDomain = "${sourceDomain}", targetDomain = "", primaryKey = "$fields[0].getLowerName()")
 public class ${className}Bean
 {
 #foreach( $field in $fields )
