@@ -86,4 +86,6 @@ CsvToBeanFilter filter = new CsvToBeanFilter()
 ------------------------------------
 TODO：
 
-1.改进拿到名字的方式 by arry
+1.改进拿到vm文件名字的方式 by arry
+
+2.改进拿到vm中主键id的设置方式 by arry

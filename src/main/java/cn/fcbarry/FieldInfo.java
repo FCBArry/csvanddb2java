@@ -23,6 +23,9 @@ public class FieldInfo
     // 字段注释
     private String comment;
 
+    // 是否是主键
+    private boolean isPrimaryKey;
+
     public String getLowerName()
     {
         int offset = name.offsetByCodePoints(0, 1);

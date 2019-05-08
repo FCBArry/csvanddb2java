@@ -2,7 +2,6 @@ package cn.fcbarry.javabean.db;
 
 import it.biobytes.ammentos.PersistentEntity;
 import it.biobytes.ammentos.PersistentField;
-
 @PersistentEntity(sourceDomain = "t_s_fire", targetDomain = "", primaryKey = "id")
 public class FireBean
 {

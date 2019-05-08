@@ -97,6 +97,10 @@ public class CSVGen
                 String comment =  m.replaceAll("").trim();
                 fieldInfo.setComment(comment);
 
+                // 主键
+                if (i == 0)
+                    fieldInfo.setPrimaryKey(true);
+
                 map.put(i, fieldInfo);
             }
 
