@@ -53,7 +53,7 @@ author:https://github.com/FCBArry
 
 2.0 读取数据的基本功能
 
-3.0 支持mysql读取（https://github.com/FCBArry/db2dao）
+3.0 支持mysql读取
 
 4.0 支持list类型 暂时支持2种List<Integer>，List<String>以逗号分割a1,a2,a3......
 
