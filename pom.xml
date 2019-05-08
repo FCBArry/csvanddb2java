@@ -5,13 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.fcbarry</groupId>
-    <artifactId>csv2javabean</artifactId>
+    <artifactId>csvanddb2javabean</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>csv2javabean</name>
+    <name>csvanddb2javabean</name>
     <description>
-        A tool for cn.fcbarry.csv2bean to cn.fcbarry.javabean.
-        A tool for cn.fcbarry.db2bean to dao.
+        A tool for csv and db to javabean.
     </description>
     <developers>
         <developer>
@@ -20,7 +19,7 @@
             <email>aryacai0624@gmail.com</email>
         </developer>
     </developers>
-    <url>https://github.com/FCBArry/csv2javabean</url>
+    <url>https://github.com/FCBArry/csvanddb2javabean</url>
 
     <packaging>jar</packaging>
     <properties>
@@ -43,6 +42,9 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <compilerArguments>
+                        <extdirs>${project.basedir}/src/main/resources/lib/</extdirs>
+                    </compilerArguments>
                 </configuration>
             </plugin>
 
@@ -98,6 +100,7 @@
     </build>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
@@ -145,10 +148,12 @@
             <version>3.4.6</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

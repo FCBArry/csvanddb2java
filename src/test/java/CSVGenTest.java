@@ -13,6 +13,6 @@ public class CSVGenTest
     {
         String confPath = "src/main/resources/csv_gen.conf";
         CSVGen csvGen = new CSVGen();
-        csvGen.genBeans(confPath, 2);
+        csvGen.genBeans(confPath, 1);
     }
 }

@@ -1,0 +1,44 @@
+package cn.fcbarry.javabean.db;
+
+#foreach( $field in $fields )
+#if( $field.getJavaType() == "Date")
+import java.util.Date;
+
+#break;
+#end
+#end
+import it.biobytes.ammentos.PersistentEntity;
+import it.biobytes.ammentos.PersistentField;
+
+@PersistentEntity(sourceDomain = "${sourceDomain}", targetDomain = "", primaryKey = "id")
+public class ${className}Bean
+{
+#foreach( $field in $fields )
+	/**
+	 * $field.getComment()
+	 */
+ 	@PersistentField
+	private $field.getJavaType() $field.getLowerName();
+
+#end
+#foreach( $field in $fields )
+	/**
+	 * $field.getComment()
+	 */
+	public $field.getJavaType() get$field.getUpperName()()
+	{
+		return $field.getLowerName();
+	}
+
+	/**
+	 * $field.getComment()
+	 */
+	public void set$field.getUpperName()($field.getJavaType() $field.getLowerName())
+	{
+		this.$field.getLowerName() = $field.getLowerName();
+	}
+#if($foreach.hasNext)
+
+#end
+#end
+}

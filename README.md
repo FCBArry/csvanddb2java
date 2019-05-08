@@ -1,5 +1,5 @@
-# csv2javabean
-cn.fcbarry.csv2bean to cn.fcbarry.javabean
+# csvanddb2javabean
+csv and db to javabean
 
 ------------------------------------
 project:maven project
@@ -19,9 +19,11 @@ author:https://github.com/FCBArry
 ------------------------------------
 概述：
 
-1.CSVGen类可用于生成javabean
+1.CSVGen类可用于生成javabean（csv版本和db版本）
 
 2.CSV2JavaBean类可用于读取csv数据到javabean
+
+3.Ammentos2Bean类可用于读取db数据到javabean
 
 3.打包生成目录在jartools下
 
@@ -41,6 +43,8 @@ author:https://github.com/FCBArry
 4.csv命名规范t_s_xxx_xxx:xxx为英文单词
 
 5.注意csv的编码格式不能带有BOM（如果按照csv头部注释，类型，字段名的顺序则不用关心）
+
+6.手动引入包resources/lib
 
 ------------------------------------
 版本：
@@ -74,3 +78,12 @@ CsvToBeanFilter filter = new CsvToBeanFilter()
 （3）......
 
 7.0 skipLines的设计不合理（吐槽）
+
+8.0 增加db to javabean
+
+9.0 增加db pool练习HikariCP
+
+------------------------------------
+TODO：
+
+1.改进拿到名字的方式 by arry
