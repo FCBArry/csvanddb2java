@@ -1,43 +1,45 @@
-package javabean;
+package cn.fcbarry.javabean.db;
 
-import com.opencsv.bean.CsvBindByName;
+import it.biobytes.ammentos.PersistentEntity;
+import it.biobytes.ammentos.PersistentField;
 
+@PersistentEntity(sourceDomain = "t_s_fire", targetDomain = "", primaryKey = "id")
 public class FireBean
 {
 	/**
 	 * ID
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private int id;
 
 	/**
 	 * 等级
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private int level;
 
 	/**
 	 * 本级所需经验
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private int exp;
 
 	/**
 	 * buffID可以填多个
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private String buff;
 
 	/**
 	 * 对应火力等级提升的攻击力
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private int magicAtk;
 
 	/**
 	 * 对应火力等级提升的生命值
 	 */
- 	@CsvBindByName
+ 	@PersistentField
 	private int magicHp;
 
 	/**

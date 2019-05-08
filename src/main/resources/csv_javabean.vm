@@ -1,4 +1,4 @@
-package javabean;
+package cn.fcbarry.javabean.csv;
 
 #foreach( $field in $fields )
 #if( $field.getJavaType() == "Date")

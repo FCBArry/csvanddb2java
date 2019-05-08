@@ -1,3 +1,5 @@
+import cn.fcbarry.Conf;
+
 /**
  *
  * conf测试类
@@ -10,7 +12,7 @@ public class ConfTest
     public static void main(String[] args)
     {
         Conf conf = new Conf();
-        conf.init("src/test/resources/project.conf");
+        conf.init("src/main/resources/csv_gen.conf");
         System.out.println(conf.getProperties().size());
     }
 }

@@ -1,3 +1,5 @@
+package cn.fcbarry;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -42,12 +44,26 @@ public class VelocityGen
         velocityEngine.init();
     }
 
-    public void genBean(String className, String sourceDomain, List<FieldInfo> fields)
+    public void genBean(int type, String className, String sourceDomain, List<FieldInfo> fields)
     {
         try
         {
-            Template template = velocityEngine.getTemplate("javabean.vm", "UTF-8");
-            String filePath = (String) properties.get("project_dir") + properties.get("bean_dir");
+            // TODO 改进拿到名字的方式 by arry
+            String vmName = null;
+            String beanDirName = null;
+            if (type == 1)
+            {
+                vmName = "csv_javabean.vm";
+                beanDirName = "csv_bean_dir";
+            }
+            else if (type == 2)
+            {
+                vmName = "db_javabean.vm";
+                beanDirName = "db_bean_dir";
+            }
+
+            Template template = velocityEngine.getTemplate(vmName, "UTF-8");
+            String filePath = (String) properties.get("project_dir") + properties.get(beanDirName);
             filePath += className + "Bean.java";
 
             FileOutputStream fos = new FileOutputStream(filePath);

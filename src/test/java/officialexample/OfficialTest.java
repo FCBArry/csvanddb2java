@@ -29,8 +29,8 @@ public class OfficialTest
             e.printStackTrace();
         }
 
-        for (Visitors fireBean : beans)
-            System.out.println(fireBean.getFirstNames() + "-"
-                    + fireBean.getLastName() + "-" + fireBean.getVisitsToWebsite());
+        for (Visitors visitors : beans)
+            System.out.println(visitors.getFirstName() + "-"
+                    + visitors.getLastName() + "-" + visitors.getVisitsToWebsite());
     }
 }

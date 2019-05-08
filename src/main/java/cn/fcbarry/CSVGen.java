@@ -1,3 +1,5 @@
+package cn.fcbarry;
+
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -21,15 +23,19 @@ public class CSVGen
     public static void main(String[] args)
     {
         // default path
-        String confPath = "E:\\github\\csv2javabean\\src\\main\\resources\\project.conf";
-        if (args.length > 0)
+        String confPath = "src/main/resources/csv_gen.conf";
+        int type = 1;
+        if (args.length > 1)
+        {
             confPath = args[0];
+            type = Integer.parseInt(args[1]);
+        }
 
         CSVGen csvGen = new CSVGen();
-        csvGen.genBeans(confPath);
+        csvGen.genBeans(confPath, type);
     }
 
-    public void genBeans(String confPath)
+    public void genBeans(String confPath, int type)
     {
         Conf conf = new Conf();
         conf.init(confPath);
@@ -46,7 +52,7 @@ public class CSVGen
             String fileName = file.getName();
             String className = Utils.genClassName(fileName);
             String sourceDomain = fileName.replace(".csv", "");
-            velocityGen.genBean(className, sourceDomain, fieldInfoList);
+            velocityGen.genBean(type, className, sourceDomain, fieldInfoList);
         }
     }
 

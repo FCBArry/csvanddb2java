@@ -1,5 +1,5 @@
 # csv2javabean
-csv to javabean
+cn.fcbarry.csv2bean to cn.fcbarry.javabean
 
 ------------------------------------
 project:maven project

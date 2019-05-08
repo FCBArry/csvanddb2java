@@ -1,4 +1,4 @@
-package javabean;
+package cn.fcbarry.javabean.db;
 
 #foreach( $field in $fields )
 #if( $field.getJavaType() == "Date")
@@ -7,36 +7,19 @@ import java.util.Date;
 #break;
 #end
 #end
-import java.util.List;
-import com.opencsv.bean.CsvBindByPosition;
-import com.opencsv.bean.CsvBindAndSplitByName;
-import com.opencsv.bean.CsvBindByName;
+import it.biobytes.ammentos.PersistentEntity;
+import it.biobytes.ammentos.PersistentField;
 
+@PersistentEntity(sourceDomain = "${sourceDomain}", targetDomain = "", primaryKey = "id")
 public class ${className}Bean
 {
 #foreach( $field in $fields )
-#if( $field.getJavaType() == 'List<Integer>' )
 	/**
 	 * $field.getComment()
 	 */
- 	@CsvBindAndSplitByName(elementType= Integer.class, splitOn = "\\,")
+ 	@PersistentField
 	private $field.getJavaType() $field.getLowerName();
 
-#elseif( $field.getJavaType() == 'List<String>' )
-	/**
-	 * $field.getComment()
-	 */
- 	@CsvBindAndSplitByName(elementType= String.class, splitOn = "\\,")
-	private $field.getJavaType() $field.getLowerName();
-
-#else
-	/**
-	 * $field.getComment()
-	 */
- 	@CsvBindByName
-	private $field.getJavaType() $field.getLowerName();
-
-#end
 #end
 #foreach( $field in $fields )
 	/**

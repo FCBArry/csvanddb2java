@@ -1,4 +1,4 @@
-package javabean;
+package cn.fcbarry.javabean;
 
 #foreach( $field in $fields )
 #if( $field.getJavaType() == "Date")

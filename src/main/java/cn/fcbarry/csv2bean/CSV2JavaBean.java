@@ -1,3 +1,7 @@
+package cn.fcbarry.csv2bean;
+
+import cn.fcbarry.Conf;
+import cn.fcbarry.Utils;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.File;
@@ -7,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * csv to javabean
+ * csv to bean
  *
  * @author 科兴第一盖伦
  * @version 2019/4/28
@@ -16,7 +20,7 @@ public class CSV2JavaBean
 {
     public static<T> List<T> getBeanList(Class tClass)
     {
-        return getBeanList("src/main/resources/project.conf", tClass);
+        return getBeanList("src/main/resources/csv_gen.conf", tClass);
     }
 
     @SuppressWarnings("unchecked")
