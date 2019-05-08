@@ -47,7 +47,7 @@ public class VelocityGen
         try
         {
             Template template = velocityEngine.getTemplate("javabean.vm", "UTF-8");
-            String filePath = (String)properties.get("project_dir") + properties.get("bean_dir");
+            String filePath = (String) properties.get("project_dir") + properties.get("bean_dir");
             filePath += className + "Bean.java";
 
             FileOutputStream fos = new FileOutputStream(filePath);
