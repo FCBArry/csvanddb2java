@@ -1,0 +1,48 @@
+package cn.fcbarry.db2dao.gen.entity;
+
+#foreach( $field in $fields )
+#if( $field.getJavaType() == "Date")
+import java.util.Date;
+#break;
+#end
+#end
+
+import cn.fcbarry.db2dao.base.DataObject;
+import cn.fcbarry.db2dao.base.DataOption;
+
+public class ${className}Info extends DataObject 
+{
+#foreach( $field in $fields )
+	/**
+	 * $field.getComment()
+	 */
+	private $field.getJavaType() $field.getLowerName();
+	
+#end
+
+#foreach( $field in $fields )
+	/**
+	 * $field.getComment()
+	 */
+	public $field.getJavaType() get$field.getUpperName()()
+	{
+		return $field.getLowerName();
+	}
+
+	/**
+	 * $field.getComment()
+	 */
+	public void set$field.getUpperName()($field.getJavaType() $field.getLowerName())
+	{
+#if ($field.getJavaType() != "Date" && $field.getJavaType() != "String")
+		if($field.getLowerName() != this.$field.getLowerName())
+#else
+		if($field.getLowerName() != null && ! ${field.getLowerName()}.equals(this.${field.getLowerName()}))
+#end
+		{
+			this.$field.getLowerName() = $field.getLowerName();
+			setOp(DataOption.UPDATE);
+		}
+	}
+#end
+}

@@ -1,5 +1,5 @@
-# csvanddb2javabean
-csv and db to javabean
+# csvanddb2java
+csv and db to javabean and dao
 
 ------------------------------------
 project:maven project
@@ -83,9 +83,13 @@ CsvToBeanFilter filter = new CsvToBeanFilter()
 
 9.0 增加db pool练习HikariCP
 
+10.0 增加db2dao包，实现数据库到实体的转换，图形化工具，源码由我老大哥王飞实现（https://github.com/wang35666）
+
 ------------------------------------
 TODO：
 
 1.改进拿到vm文件名字的方式 by arry
 
 2.改进拿到vm中主键id的设置方式 by arry
+
+3.整理db2dao vm的格式

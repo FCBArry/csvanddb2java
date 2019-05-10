@@ -1,6 +1,6 @@
 import cn.fcbarry.Conf;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import cn.fcbarry.db2bean.orm.Ammentos2Bean;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import it.biobytes.ammentos.Ammentos;
 import cn.fcbarry.javabean.db.FireBean;
 
@@ -19,11 +19,11 @@ public class Ammentos2BeanTest
     public static void main(String[] args)
     {
         Conf conf = new Conf();
-        conf.init("src/main/resources/db_config.conf");
+        conf.init("src/main/resources/db.conf");
         Properties properties = conf.getProperties();
 
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl(properties.getProperty("jdbcUrl"));
+        dataSource.setUrl(properties.getProperty("ammentos"));
         dataSource.setUser(properties.getProperty("username"));
         dataSource.setPassword(properties.getProperty("password"));
         Ammentos.setDataSource(dataSource);

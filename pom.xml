@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.fcbarry</groupId>
-    <artifactId>csvanddb2javabean</artifactId>
+    <artifactId>csvanddb2java</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>csvanddb2javabean</name>
+    <name>csvanddb2java</name>
     <description>
-        A tool for csv and db to javabean.
+        A tool for csv and db to javabean and dao.
     </description>
     <developers>
         <developer>
@@ -19,7 +19,7 @@
             <email>aryacai0624@gmail.com</email>
         </developer>
     </developers>
-    <url>https://github.com/FCBArry/csvanddb2javabean</url>
+    <url>https://github.com/FCBArry/csvanddb2java</url>
 
     <packaging>jar</packaging>
     <properties>
@@ -83,7 +83,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy todir="${project.basedir}/jartools">
+                                <copy todir="${project.basedir}/csvgentool">
                                     <fileset dir="${project.build.directory}">
                                         <include name="*jar-with-dependencies*.jar" />
                                     </fileset>
@@ -134,12 +134,14 @@
             <version>1.7.5</version>
         </dependency>
 
+        <!-- 后期升级 -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.5</version>
+            <version>5.1.20</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
         <dependency>
@@ -154,6 +156,25 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64 -->
+        <dependency>
+            <groupId>org.eclipse.swt</groupId>
+            <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
+            <version>4.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>0.8.0.RELEASE</version>
         </dependency>
     </dependencies>
 </project>

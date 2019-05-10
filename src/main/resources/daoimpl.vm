@@ -1,0 +1,244 @@
+#set( $infoName = "${className}Info" )
+#set( $lowInfoName = "${lowClassName}Info" )
+package cn.fcbarry.db2dao.gen.dao.impl;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Types;
+import java.util.List;
+
+import cn.fcbarry.db2dao.base.BaseDao;
+import cn.fcbarry.db2dao.base.DBParamWrapper;
+import cn.fcbarry.db2dao.base.DataExecutor;
+import cn.fcbarry.db2dao.base.DBHelper;
+
+import cn.fcbarry.db2dao.base.DataOption;
+import cn.fcbarry.db2dao.gen.dao.I${infoName}Dao;
+import cn.fcbarry.db2dao.gen.entity.${infoName};
+
+public class ${infoName}DaoImpl extends BaseDao<${infoName}> implements I${infoName}Dao
+{
+	public ${infoName}DaoImpl(DBHelper helper)
+	{
+		super(helper);
+	}
+
+
+	@Override
+	public boolean add(${infoName} ${lowInfoName})
+	{
+		boolean result = false;
+		String sql = ${insertSql};
+		DBParamWrapper params = new DBParamWrapper();
+		#foreach( $field in $fields )
+params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+		#end
+	
+		result = getDbHelper().execNoneQuery(sql, params) > -1 ? true : false;
+		if (result) 
+			${lowInfoName}.setOp(DataOption.NONE);
+			
+		return result;
+	}
+
+	@Override
+	public boolean update(${infoName} ${lowInfoName})
+	{
+		if(${lowInfoName}.getOp() == DataOption.NONE)
+			return true;
+
+		boolean result = false;
+		String sql = ${updateSql};
+		DBParamWrapper params = new DBParamWrapper();
+#foreach( $field in $fields )
+#if( !$field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+#foreach( $field in $fields )
+#if( $field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+	
+		result = getDbHelper().execNoneQuery(sql, params) > -1 ? true : false;
+		if (result) 
+			${lowInfoName}.setOp(DataOption.NONE);
+			
+		return result;
+	}
+
+	@Override
+	public boolean delete(${infoName} ${lowInfoName})
+	{
+		boolean result = false;
+		String sql = ${deleteSql};
+		DBParamWrapper params = new DBParamWrapper();
+#foreach( $field in $fields )
+#if( $field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+		result = getDbHelper().execNoneQuery(sql, params) > -1 ? true : false;
+		return result;
+	}
+
+	@Override
+	public boolean addOrUpdate(${infoName} ${lowInfoName})
+	{
+		boolean result = false;
+		String sql = ${addOrUpdateSql};
+		if(${lowInfoName}.getOp() == DataOption.NONE)
+			return true;
+		DBParamWrapper params = new DBParamWrapper();
+#foreach( $field in $fields )
+		params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#foreach( $field in $fields )
+#if( !$field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+		result = getDbHelper().execNoneQuery(sql, params) > -1 ? true : false;
+		if (result) 
+			${lowInfoName}.setOp(DataOption.NONE);
+			
+		return result;
+	}
+
+	@Override
+	public boolean deleteByKey(Object... ids)
+	{
+		boolean result = false;
+		String sql = ${deleteSql};
+		DBParamWrapper params = new DBParamWrapper();
+#set ($idx = 0)
+#foreach( $field in $fields )
+#if( $field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ids[$idx]);
+#set ($idx = $idx + 1)
+#end
+#end
+		result = getDbHelper().execNoneQuery(sql, params) > -1 ? true : false;
+		return result;
+	}
+
+	@Override
+	public ${infoName} getByKey(Object... ids)
+	{
+		String sql = ${selectSql};
+		DBParamWrapper params = new DBParamWrapper();
+#set ($idx = 0)
+#foreach( $field in $fields )
+#if( $field.isPrimaryKey() )
+		params.put(Types.${field.getParamsType()}, ids[$idx]);
+#set ($idx = $idx + 1)
+#end
+#end
+		${infoName} ${lowInfoName} = query(sql, params);		return ${lowInfoName};
+	}
+
+
+	@Override
+	public List<${infoName}> listAll()
+	{
+		String sql = "select * from ${tableName};";
+		List<${infoName}> ${lowInfoName}s = queryList(sql);		return ${lowInfoName}s;
+	}
+
+	@Override
+	public int[] addOrUpdateBatch(List<${infoName}> ${lowInfoName}s)
+	{
+		String sql = ${addOrUpdateSql};
+		int[] effectedRows = getDbHelper().sqlBatch(sql, ${lowInfoName}s, new DataExecutor<int[]>()
+			{
+				@Override
+				public int[] execute(PreparedStatement statement, Object... objects) throws Exception
+				{
+					@SuppressWarnings("unchecked")
+					List<${infoName}> ${lowInfoName}s = (List<${infoName}>)objects[0];
+					for (${infoName} ${lowInfoName} : ${lowInfoName}s)
+					{
+						if(${lowInfoName}.getOp() == DataOption.NONE)
+							continue;
+						DBParamWrapper params = new DBParamWrapper();
+#foreach( $field in $fields )
+						params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#foreach( $field in $fields )
+#if( !$field.isPrimaryKey() )
+						params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+		
+						statement = getDbHelper().prepareCommand(statement, params);
+						statement.addBatch();
+					}
+					return statement.executeBatch();
+				}
+			});
+			for(int i=0; i<effectedRows.length; ++i)
+			{
+				if (effectedRows[i] > -1)
+					${lowInfoName}s.get(i).setOp(DataOption.NONE);
+			}
+		return effectedRows;
+	}
+
+	@Override
+	public int[] deleteBatch(List<${infoName}> ${lowInfoName}s)
+	{
+		String sql = ${deleteSql};
+		int[] effectedRows = getDbHelper().sqlBatch(sql, ${lowInfoName}s, new DataExecutor<int[]>()
+		{
+			@Override
+			public int[] execute(PreparedStatement statement, Object... objects) throws Exception
+			{
+				@SuppressWarnings("unchecked")
+				List<${infoName}>${lowInfoName}s = (List<${infoName}>)objects[0];
+				for (${infoName} ${lowInfoName} : ${lowInfoName}s)
+				{
+					DBParamWrapper params = new DBParamWrapper();
+#foreach( $field in $fields )
+#if( $field.isPrimaryKey() )
+					params.put(Types.${field.getParamsType()}, ${lowInfoName}.get${field.getUpperName()}());
+#end
+#end
+					statement = getDbHelper().prepareCommand(statement, params);
+					statement.addBatch();
+				}
+				return statement.executeBatch();
+			}
+		});
+		return effectedRows;
+	}
+	
+	@Override
+	public ${infoName} rsToEntity(ResultSet rs) throws Exception
+	{
+		${infoName} ${lowInfoName} = null;
+		if (pool != null)
+			${lowInfoName} = pool.borrowObject();
+		else
+			${lowInfoName} = new ${infoName}();
+
+#foreach( $field in $fields )
+		${lowInfoName}.set${field.getUpperName()}(rs.get${field.getUpperJavaTypeName()}("${field.getName()}"));
+#end
+		
+		${lowInfoName}.setOp(DataOption.NONE);
+		return ${lowInfoName};
+	}
+
+#if( $genGetByUserID )
+	@Override
+	public List<${infoName}> get${infoName}ByUserID(long userID)
+	{
+		String sql = "select * from ${tableName} where `userID` = ?;";
+		DBParamWrapper params = new DBParamWrapper();
+		params.put(Types.BIGINT, userID);
+		List<${infoName}> ${lowInfoName} = queryList(sql,params);
+		return ${lowInfoName};
+	}
+#end
+}

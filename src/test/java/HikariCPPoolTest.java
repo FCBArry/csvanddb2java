@@ -1,4 +1,4 @@
-import cn.fcbarry.db2bean.pool.hikaricp.HikariCPPool;
+import cn.fcbarry.db2dao.base.hikariPool.HikariCPPool;
 
 /**
  *

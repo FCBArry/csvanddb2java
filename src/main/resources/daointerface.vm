@@ -1,0 +1,14 @@
+#set( $infoName = "${className}Info" )
+package cn.fcbarry.db2dao.gen.dao;
+
+import cn.fcbarry.db2dao.base.IBaseDao;
+import java.util.List;
+
+import cn.fcbarry.db2dao.gen.entity.${infoName};
+
+public interface I${infoName}Dao extends IBaseDao<${infoName}>
+{
+#if( $genGetByUserID )
+	List<${infoName}> get${infoName}ByUserID(long userID);
+#end
+}
