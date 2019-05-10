@@ -25,7 +25,7 @@ author:https://github.com/FCBArry
 
 3.Ammentos2Bean类可用于读取db数据到javabean
 
-3.打包生成目录在jartools下
+3.打包生成目录在csvgentool下，目前只做了一个csvgen的jar包，生成jar包可在pom里面配置
 
 4.测试用例在test包下
 

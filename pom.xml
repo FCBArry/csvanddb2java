@@ -94,6 +94,24 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    <!--
+                    <execution>
+                        <id>test</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.basedir}/test">
+                                    <fileset dir="${project.build.directory}">
+                                        <include name="*jar-with-dependencies*.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    -->
                 </executions>
             </plugin>
         </plugins>
