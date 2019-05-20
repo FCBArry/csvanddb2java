@@ -36,7 +36,7 @@ public class CSV2JavaBean
             if (file != null)
             {
                 beans = new CsvToBeanBuilder(new FileReader(file))
-                        .withType(tClass).withSkipLines(2)
+                        .withType(tClass).withSkipLines(3)
                         .build().parse();
             }
         }

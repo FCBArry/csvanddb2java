@@ -39,17 +39,11 @@ public class ${className}Bean
 #end
 #end
 #foreach( $field in $fields )
-	/**
-	 * $field.getComment()
-	 */
 	public $field.getJavaType() get$field.getUpperName()()
 	{
 		return $field.getLowerName();
 	}
 
-	/**
-	 * $field.getComment()
-	 */
 	public void set$field.getUpperName()($field.getJavaType() $field.getLowerName())
 	{
 		this.$field.getLowerName() = $field.getLowerName();

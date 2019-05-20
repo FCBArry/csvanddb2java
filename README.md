@@ -46,6 +46,10 @@ author:https://github.com/FCBArry
 
 6.手动引入包resources/lib
 
+7.csv头部注释不能\n，解决方案目前有2种：
+（1）去掉\n
+（2）使用filter方式忽略注释这一行
+
 ------------------------------------
 版本：
 
@@ -84,6 +88,8 @@ CsvToBeanFilter filter = new CsvToBeanFilter()
 9.0 增加db pool练习HikariCP
 
 10.0 增加db2dao包，实现数据库到实体的转换，图形化工具，源码由我老大哥王飞实现（https://github.com/wang35666）
+
+11.0 修改一些vm格式；增加mgr的生成；csv头部变成4行，多增加K,V行（不需要的可以去掉）
 
 ------------------------------------
 TODO：

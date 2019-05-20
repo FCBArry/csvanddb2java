@@ -77,7 +77,7 @@ public class CSVGen
                 FieldInfo fieldInfo = new FieldInfo();
 
                 // 字段名
-                String[] data = dataList.get(2);
+                String[] data = dataList.get(3);
                 if (data[i].startsWith("\uFEFF"))
                     data[i] = data[i].substring(1);
                 String name = data[i].substring(0, 1).toLowerCase() + data[i].substring(1);;

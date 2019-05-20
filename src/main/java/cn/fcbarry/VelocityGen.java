@@ -86,4 +86,32 @@ public class VelocityGen
             e.printStackTrace();
         }
     }
+
+    public void genMgr(String className, String key)
+    {
+        try
+        {
+            Template template = velocityEngine.getTemplate("csv_javabeanmgr.vm", "UTF-8");
+            String filePath = (String)properties.get("project_dir") + properties.get("mgr_dir");
+            filePath += className + "Mgr.java";
+
+            FileOutputStream fos = new FileOutputStream(filePath);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
+
+            VelocityContext ctx = new VelocityContext();
+            ctx.put("className", className);
+            ctx.put("primaryKey", key);
+            template.merge(ctx, writer);
+
+            System.out.println("##################已生成：" + filePath);
+
+            writer.flush();
+            writer.close();
+            fos.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
